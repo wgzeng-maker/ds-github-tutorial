@@ -8,6 +8,7 @@ they don't define the important logic themselves.
 from rnaseq_tutorial.data import load_counts, simulate_counts
 from rnaseq_tutorial.features import filter_low_counts, normalize_cpm
 from rnaseq_tutorial.model import differential_expression
+from rnaseq_tutorial.plots import volcano_data
 
 __version__ = "0.1.0"
 
@@ -17,4 +18,5 @@ __all__ = [
     "filter_low_counts",
     "normalize_cpm",
     "differential_expression",
+    "volcano_data",
 ]
