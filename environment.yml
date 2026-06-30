@@ -1,0 +1,34 @@
+# Conda environment for reproducibility.
+#
+# Why conda and not just pip? Bioinformatics often needs non-Python system tools
+# (samtools, bcftools, bwa, R, etc.) that pip can't install. Conda manages both.
+# Pin major versions so the environment is reproducible months from now.
+#
+#   conda env create -f environment.yml
+#   conda activate rnaseq-tutorial
+#
+# Tip: use `mamba` instead of `conda` for much faster solves.
+
+name: rnaseq-tutorial
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python=3.11
+  - numpy>=1.26
+  - pandas>=2.1
+  - scipy>=1.11
+  - scikit-learn>=1.4
+  - statsmodels>=0.14
+  - matplotlib>=3.8
+  - seaborn>=0.13
+  - jupyterlab>=4.0
+  # Example bioinformatics system tools (uncomment for real projects):
+  # - samtools>=1.19
+  # - bcftools>=1.19
+  - pip>=23.3
+  # Anything not on conda goes through pip:
+  - pip:
+      - -e ".[dev]"

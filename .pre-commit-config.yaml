@@ -1,0 +1,30 @@
+# Pre-commit hooks run automatically every time you `git commit`.
+# They catch problems *before* they enter history — much cheaper than fixing later.
+#
+# Install once per clone:   pre-commit install
+# Run on all files manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files   # blocks accidental commits of big data files
+        args: ["--maxkb=1000"]
+      - id: check-merge-conflict
+      - id: detect-private-key        # stops you committing secrets
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: ruff                       # lint
+        args: [--fix]
+      - id: ruff-format                # format
+
+  # For real notebook work, strip outputs before committing:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout

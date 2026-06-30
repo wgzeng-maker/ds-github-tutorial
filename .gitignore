@@ -1,0 +1,62 @@
+# ---- The most important file in a data science repo ----
+# If you commit the wrong thing once, it's in git history forever.
+# Be deliberate about what you DON'T track.
+
+# Data — regenerable outputs and large/sensitive inputs do not belong in git.
+# Use DVC, git-LFS, or cloud storage for real datasets. See data/README.md.
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.csv
+*.tsv
+*.parquet
+*.h5
+*.h5ad
+*.bam
+*.fastq
+*.fastq.gz
+*.vcf
+*.vcf.gz
+
+# Model artifacts & large binaries
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.pkl
+*.joblib
+models/
+
+# Notebook cruft — strip outputs before committing (see .pre-commit-config.yaml)
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+.env
+.python-version
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Secrets — NEVER commit credentials. If you do, rotate them immediately.
+*.pem
+*.key
+secrets.yml
+.env.local

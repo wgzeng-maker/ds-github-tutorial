@@ -1,0 +1,51 @@
+# pyproject.toml — the modern single source of truth for Python projects.
+# Replaces setup.py, setup.cfg, requirements.txt (mostly), and scattered tool configs.
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rnaseq-tutorial"
+version = "0.1.0"
+description = "A reference project structure for data science / bioinformatics / ML."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "wgzeng-maker" }]
+
+# Runtime dependencies. Keep these minimal — only what `import rnaseq_tutorial` needs.
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "scipy>=1.11",
+    "scikit-learn>=1.4",
+    "statsmodels>=0.14",
+]
+
+# Optional dependency groups. `pip install -e ".[dev]"` gets you the dev toolchain.
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "ruff>=0.3",
+    "pre-commit>=3.6",
+]
+
+# Makes `src/rnaseq_tutorial` importable as `rnaseq_tutorial`.
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ---- Tool configuration lives here too, so it's all in one place ----
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# A sensible, not-overly-strict default rule set.
+select = ["E", "F", "I", "W", "UP", "B"]  # errors, pyflakes, import-sort, warnings, pyupgrade, bugbear
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=rnaseq_tutorial --cov-report=term-missing"
